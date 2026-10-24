@@ -1,0 +1,686 @@
+[
+ {
+  "name": "pracuj.pl",
+  "domain": "pracuj.pl",
+  "group": "pl-general",
+  "method": "site"
+ },
+ {
+  "name": "praca.pl",
+  "domain": "praca.pl",
+  "group": "pl-general",
+  "method": "fetch"
+ },
+ {
+  "name": "OLX Praca",
+  "domain": "olx.pl/praca",
+  "group": "pl-general",
+  "method": "site"
+ },
+ {
+  "name": "GoWork",
+  "domain": "gowork.pl",
+  "group": "pl-general",
+  "method": "site"
+ },
+ {
+  "name": "Infopraca",
+  "domain": "infopraca.pl",
+  "group": "pl-general",
+  "method": "site"
+ },
+ {
+  "name": "Aplikuj.pl",
+  "domain": "aplikuj.pl",
+  "group": "pl-general",
+  "method": "fetch"
+ },
+ {
+  "name": "Indeed Polska",
+  "domain": "pl.indeed.com",
+  "group": "pl-general",
+  "method": "site"
+ },
+ {
+  "name": "Jooble Polska",
+  "domain": "pl.jooble.org",
+  "group": "pl-general",
+  "method": "site"
+ },
+ {
+  "name": "Careerjet Polska",
+  "domain": "careerjet.pl",
+  "group": "pl-general",
+  "method": "site"
+ },
+ {
+  "name": "Centralna Baza Ofert Pracy",
+  "domain": "oferty.praca.gov.pl",
+  "group": "pl-general",
+  "method": "site"
+ },
+ {
+  "name": "Nabory KPRM (służba cywilna)",
+  "domain": "nabory.kprm.gov.pl",
+  "group": "pl-general",
+  "method": "site"
+ },
+ {
+  "name": "Jobs.pl",
+  "domain": "jobs.pl",
+  "group": "pl-general",
+  "method": "site"
+ },
+ {
+  "name": "Pracuj dla studentów / staże",
+  "domain": "staze.pl",
+  "group": "pl-student",
+  "method": "site"
+ },
+ {
+  "name": "Biuro Karier PWr",
+  "domain": "biurokarier.pwr.edu.pl",
+  "group": "pl-student",
+  "method": "fetch"
+ },
+ {
+  "name": "Akademickie Biuro Karier WSB Merito",
+  "domain": "wsb.pl",
+  "group": "pl-student",
+  "method": "site"
+ },
+ {
+  "name": "StudentJob",
+  "domain": "studentjob.pl",
+  "group": "pl-student",
+  "method": "site"
+ },
+ {
+  "name": "Just Join IT",
+  "domain": "justjoin.it",
+  "group": "pl-it",
+  "method": "site"
+ },
+ {
+  "name": "No Fluff Jobs",
+  "domain": "nofluffjobs.com",
+  "group": "pl-it",
+  "method": "site"
+ },
+ {
+  "name": "theprotocol.it",
+  "domain": "theprotocol.it",
+  "group": "pl-it",
+  "method": "site"
+ },
+ {
+  "name": "Bulldogjob",
+  "domain": "bulldogjob.pl",
+  "group": "pl-it",
+  "method": "site"
+ },
+ {
+  "name": "Solid.jobs",
+  "domain": "solid.jobs",
+  "group": "pl-it",
+  "method": "site"
+ },
+ {
+  "name": "RocketJobs",
+  "domain": "rocketjobs.pl",
+  "group": "pl-it",
+  "method": "site"
+ },
+ {
+  "name": "inhire.io",
+  "domain": "inhire.io",
+  "group": "pl-it",
+  "method": "site"
+ },
+ {
+  "name": "4programmers Praca",
+  "domain": "4programmers.net/Praca",
+  "group": "pl-it",
+  "method": "site"
+ },
+ {
+  "name": "Useme (freelance PL)",
+  "domain": "useme.com",
+  "group": "freelance",
+  "method": "site"
+ },
+ {
+  "name": "Oferia (freelance PL)",
+  "domain": "oferia.pl",
+  "group": "freelance",
+  "method": "site"
+ },
+ {
+  "name": "LinkedIn Jobs",
+  "domain": "linkedin.com/jobs",
+  "group": "global",
+  "method": "api"
+ },
+ {
+  "name": "Glassdoor",
+  "domain": "glassdoor.com",
+  "group": "global",
+  "method": "site"
+ },
+ {
+  "name": "EURES",
+  "domain": "eures.europa.eu",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "StepStone DE",
+  "domain": "stepstone.de",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "Indeed DE",
+  "domain": "de.indeed.com",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "XING Jobs",
+  "domain": "xing.com/jobs",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "Arbeitnow",
+  "domain": "arbeitnow.com",
+  "group": "eu",
+  "method": "api"
+ },
+ {
+  "name": "Berlin Startup Jobs",
+  "domain": "berlinstartupjobs.com",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "GermanTechJobs",
+  "domain": "germantechjobs.de",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "SwissDevJobs",
+  "domain": "swissdevjobs.ch",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "jobs.ch",
+  "domain": "jobs.ch",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "karriere.at",
+  "domain": "karriere.at",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "Jobs.cz",
+  "domain": "jobs.cz",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "StartupJobs.cz",
+  "domain": "startupjobs.cz",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "Profesia.sk",
+  "domain": "profesia.sk",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "Landing.jobs",
+  "domain": "landing.jobs",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "Welcome to the Jungle",
+  "domain": "welcometothejungle.com",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "EU Remote Jobs",
+  "domain": "euremotejobs.com",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "EU-Startups Jobs",
+  "domain": "jobs.eu-startups.com",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "startup.jobs",
+  "domain": "startup.jobs",
+  "group": "global",
+  "method": "site"
+ },
+ {
+  "name": "Reed UK",
+  "domain": "reed.co.uk",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "Totaljobs",
+  "domain": "totaljobs.com",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "CV-Library",
+  "domain": "cv-library.co.uk",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "CWJobs",
+  "domain": "cwjobs.co.uk",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "jobs.ac.uk",
+  "domain": "jobs.ac.uk",
+  "group": "research",
+  "method": "site"
+ },
+ {
+  "name": "EURAXESS",
+  "domain": "euraxess.ec.europa.eu",
+  "group": "research",
+  "method": "site"
+ },
+ {
+  "name": "Academic Positions",
+  "domain": "academicpositions.com",
+  "group": "research",
+  "method": "site"
+ },
+ {
+  "name": "FINN jobb",
+  "domain": "finn.no/job",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "Jobindex DK",
+  "domain": "jobindex.dk",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "Platsbanken SE",
+  "domain": "arbetsformedlingen.se",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "Nationale Vacaturebank",
+  "domain": "nationalevacaturebank.nl",
+  "group": "eu",
+  "method": "site"
+ },
+ {
+  "name": "Remote OK",
+  "domain": "remoteok.com",
+  "group": "remote",
+  "method": "api"
+ },
+ {
+  "name": "We Work Remotely",
+  "domain": "weworkremotely.com",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "Remotive",
+  "domain": "remotive.com",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "Wellfound",
+  "domain": "wellfound.com",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "Working Nomads",
+  "domain": "workingnomads.com",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "Himalayas",
+  "domain": "himalayas.app",
+  "group": "remote",
+  "method": "api"
+ },
+ {
+  "name": "Jobspresso",
+  "domain": "jobspresso.co",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "Remote.co",
+  "domain": "remote.co",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "FlexJobs",
+  "domain": "flexjobs.com",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "JustRemote",
+  "domain": "justremote.co",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "Dynamite Jobs",
+  "domain": "dynamitejobs.com",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "NoDesk",
+  "domain": "nodesk.co",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "4 Day Week",
+  "domain": "4dayweek.io",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "Jobicy",
+  "domain": "jobicy.com",
+  "group": "remote",
+  "method": "api"
+ },
+ {
+  "name": "Pangian",
+  "domain": "pangian.com",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "PowerToFly",
+  "domain": "powertofly.com",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "Remote Python",
+  "domain": "remotepython.com",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "Python.org Jobs",
+  "domain": "python.org/jobs",
+  "group": "it",
+  "method": "site"
+ },
+ {
+  "name": "AI Jobs (aijobs.net)",
+  "domain": "aijobs.net",
+  "group": "ml",
+  "method": "site"
+ },
+ {
+  "name": "HN Who is hiring",
+  "domain": "hnhiring.com",
+  "group": "it",
+  "method": "site"
+ },
+ {
+  "name": "Built In",
+  "domain": "builtin.com",
+  "group": "global",
+  "method": "site"
+ },
+ {
+  "name": "Dice",
+  "domain": "dice.com",
+  "group": "global",
+  "method": "site"
+ },
+ {
+  "name": "Monster",
+  "domain": "monster.com",
+  "group": "global",
+  "method": "site"
+ },
+ {
+  "name": "SimplyHired",
+  "domain": "simplyhired.com",
+  "group": "global",
+  "method": "site"
+ },
+ {
+  "name": "ZipRecruiter",
+  "domain": "ziprecruiter.com",
+  "group": "global",
+  "method": "site"
+ },
+ {
+  "name": "Jooble (global)",
+  "domain": "jooble.org",
+  "group": "global",
+  "method": "api"
+ },
+ {
+  "name": "Adzuna",
+  "domain": "adzuna.com",
+  "group": "global",
+  "method": "api"
+ },
+ {
+  "name": "Careerjet (global)",
+  "domain": "careerjet.com",
+  "group": "global",
+  "method": "site"
+ },
+ {
+  "name": "Arc.dev",
+  "domain": "arc.dev",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "Turing",
+  "domain": "turing.com",
+  "group": "remote",
+  "method": "site"
+ },
+ {
+  "name": "Braintrust",
+  "domain": "usebraintrust.com",
+  "group": "freelance",
+  "method": "site"
+ },
+ {
+  "name": "Contra",
+  "domain": "contra.com",
+  "group": "freelance",
+  "method": "site"
+ },
+ {
+  "name": "Upwork",
+  "domain": "upwork.com",
+  "group": "freelance",
+  "method": "site"
+ },
+ {
+  "name": "Freelancer.com",
+  "domain": "freelancer.com",
+  "group": "freelance",
+  "method": "site"
+ },
+ {
+  "name": "PeoplePerHour",
+  "domain": "peopleperhour.com",
+  "group": "freelance",
+  "method": "site"
+ },
+ {
+  "name": "Guru",
+  "domain": "guru.com",
+  "group": "freelance",
+  "method": "site"
+ },
+ {
+  "name": "Malt",
+  "domain": "malt.com",
+  "group": "freelance",
+  "method": "site"
+ },
+ {
+  "name": "Cad Crowd",
+  "domain": "cadcrowd.com",
+  "group": "cad",
+  "method": "site"
+ },
+ {
+  "name": "EngineerJobs",
+  "domain": "engineerjobs.com",
+  "group": "cad",
+  "method": "site"
+ },
+ {
+  "name": "Alignerr",
+  "domain": "alignerr.com",
+  "group": "ai-training",
+  "method": "site"
+ },
+ {
+  "name": "Outlier",
+  "domain": "outlier.ai",
+  "group": "ai-training",
+  "method": "site"
+ },
+ {
+  "name": "DataAnnotation",
+  "domain": "dataannotation.tech",
+  "group": "ai-training",
+  "method": "site"
+ },
+ {
+  "name": "Mercor",
+  "domain": "mercor.com",
+  "group": "ai-training",
+  "method": "site"
+ },
+ {
+  "name": "Greenhouse boards",
+  "domain": "boards.greenhouse.io",
+  "group": "ats",
+  "method": "site"
+ },
+ {
+  "name": "Greenhouse job-boards",
+  "domain": "job-boards.greenhouse.io",
+  "group": "ats",
+  "method": "site"
+ },
+ {
+  "name": "Lever",
+  "domain": "jobs.lever.co",
+  "group": "ats",
+  "method": "site"
+ },
+ {
+  "name": "Ashby",
+  "domain": "jobs.ashbyhq.com",
+  "group": "ats",
+  "method": "site"
+ },
+ {
+  "name": "Workable",
+  "domain": "apply.workable.com",
+  "group": "ats",
+  "method": "site"
+ },
+ {
+  "name": "SmartRecruiters",
+  "domain": "jobs.smartrecruiters.com",
+  "group": "ats",
+  "method": "site"
+ },
+ {
+  "name": "Teamtailor",
+  "domain": "teamtailor.com",
+  "group": "ats",
+  "method": "site"
+ },
+ {
+  "name": "Recruitee",
+  "domain": "recruitee.com",
+  "group": "ats",
+  "method": "site"
+ },
+ {
+  "name": "Personio",
+  "domain": "jobs.personio.de",
+  "group": "ats",
+  "method": "site"
+ },
+ {
+  "name": "BambooHR",
+  "domain": "bamboohr.com/careers",
+  "group": "ats",
+  "method": "site"
+ },
+ {
+  "name": "Traffit",
+  "domain": "traffit.com",
+  "group": "ats",
+  "method": "site"
+ },
+ {
+  "name": "eRecruiter",
+  "domain": "erecruiter.pl",
+  "group": "ats",
+  "method": "site"
+ },
+ {
+  "name": "Workday",
+  "domain": "myworkdayjobs.com",
+  "group": "ats",
+  "method": "site"
+ },
+ {
+  "name": "Fantastic.jobs (ATS aggregate)",
+  "domain": "data.fantastic.jobs",
+  "group": "ats",
+  "method": "api"
+ }
+]

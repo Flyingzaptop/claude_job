@@ -1,0 +1,6 @@
+{
+ "a": ["ключевые слова направления A"],
+ "b": ["ключевые слова направления B"],
+ "modifiers": ["zdalnie", "remote", "hybrydowo", "część etatu", "part-time", "junior", "intern"],
+ "locations": ["Город", "Poland", "Europe", "worldwide"]
+}

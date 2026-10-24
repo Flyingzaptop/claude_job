@@ -1,0 +1,26 @@
+{
+ "_comment": "Заполняется на шаге настройки (SETUP.md). Читают tools/*.py и tracker/index.html.",
+ "name": "Имя Фамилия",
+ "email": "email@example.com",
+ "phone": "",
+ "deadline": "ГГГГ-ММ-ДД",
+ "tracker_url": "",
+ "search_trigger_id": "",
+ "cv_prefix": "Imie_Nazwisko_CV",
+ "tracks": {"a": "Направление A", "b": "Направление B"},
+ "cv_langs": ["PL", "EN"],
+ "messages": {
+  "a": {"PL": "Dzień dobry, aplikuję na stanowisko {title} w {company}. …\n\nPozdrawiam,\nImię Nazwisko",
+        "EN": "Hello, I am applying for the {title} position at {company}. …\n\nBest regards,\nName Surname"},
+  "b": {"PL": "Dzień dobry, aplikuję na stanowisko {title} w {company}. …\n\nPozdrawiam,\nImię Nazwisko",
+        "EN": "Hello, I am applying for the {title} position at {company}. …\n\nBest regards,\nName Surname"}
+ },
+ "excluded_language_regex": "(deutsch|german (skills|language|c1|b2)|fließend|verhandlungssicher)",
+ "linkedin_searches": [
+  {"keywords": "python OR data analyst", "location": "Wrocław, Dolnośląskie, Poland", "distance": "50", "f_E": "1,2"},
+  {"keywords": "python OR data analyst", "location": "European Union", "f_E": "1,2", "f_WT": "2"}
+ ],
+ "jooble_queries": [["junior python developer", "Poland"], ["junior python developer remote", "remote"]],
+ "fantastic": {"titles": "\"Junior\" OR \"Intern\" OR \"Trainee\"", "location": "\"Poland\""},
+ "apify_max_usd_per_run": "1.0"
+}

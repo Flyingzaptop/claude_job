@@ -1,0 +1,286 @@
+<title>Job Board</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: drawing-sheet title block on top, then a dense, filterable job register below. */
+:root {
+  --paper: #f4f6f8; --sheet: #ffffff; --ink: #18232e; --muted: #5d6b78; --rule: #d3dbe2;
+  --accent: #1f5fa8; --accent-soft: #e3edf8;
+  --good: #1e7a4a; --warn: #a86a12; --bad: #b2362b;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #0f161d; --sheet: #16202a; --ink: #e4ebf1; --muted: #93a3b1; --rule: #2a3946;
+  --accent: #6ea8e8; --accent-soft: #1b2c3f; --good: #5cc28a; --warn: #e0a74c; --bad: #ec7d71; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #0f161d; --sheet: #16202a; --ink: #e4ebf1; --muted: #93a3b1; --rule: #2a3946;
+  --accent: #6ea8e8; --accent-soft: #1b2c3f; --good: #5cc28a; --warn: #e0a74c; --bad: #ec7d71; color-scheme: dark }
+body { background: var(--paper); color: var(--ink); font: 14px/1.45 var(--sans); }
+.wrap { max-width: 1100px; margin: 0 auto; padding-block: 20px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.block { display: grid; grid-template-columns: 2fr 1fr 1fr; border: 1.5px solid var(--ink); background: var(--sheet); }
+.block > div { padding: 10px 14px; border-left: 1px solid var(--rule); min-width: 0; }
+.block > div:first-child { border-left: 0; }
+.lbl { font: 500 10.5px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { margin: 4px 0 0; font-size: 22px; font-weight: 600; text-wrap: balance; }
+.val { margin-top: 4px; font: 500 15px var(--mono); overflow-wrap: anywhere; }
+button.copy { font: 12px var(--sans); background: none; border: 1px solid var(--rule); color: var(--accent); border-radius: 3px; padding: 1px 7px; cursor: pointer; margin-left: 6px; }
+.stats { display: flex; flex-wrap: wrap; gap: 0; margin-top: 14px; border: 1px solid var(--rule); background: var(--sheet); }
+.stat { flex: 1 1 90px; padding: 8px 12px; border-left: 1px solid var(--rule); }
+.stat:first-child { border-left: 0; }
+.stat b { display: block; font: 600 20px var(--mono); font-variant-numeric: tabular-nums; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 10px; align-items: center; }
+.filters input, .filters select { font: 14px var(--sans); color: var(--ink); background: var(--sheet); border: 1px solid var(--rule); border-radius: 3px; padding: 6px 8px; }
+.filters input[type=search] { flex: 1 1 220px; min-width: 0; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.list { display: grid; gap: 6px; }
+.job { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: start; background: var(--sheet); border: 1px solid var(--rule); padding: 10px 12px; }
+.score { font: 600 18px var(--mono); text-align: center; padding: 6px 0; border: 1.5px solid currentColor; font-variant-numeric: tabular-nums; }
+.s-hi { color: var(--good); } .s-mid { color: var(--warn); } .s-lo { color: var(--muted); }
+.main { min-width: 0; }
+.title { font-weight: 600; font-size: 15px; color: var(--ink); text-decoration: none; }
+.title:hover { color: var(--accent); text-decoration: underline; }
+.meta { color: var(--muted); font-size: 13px; margin-top: 2px; overflow-wrap: anywhere; }
+.why { margin-top: 5px; }
+.flags { margin-top: 3px; color: var(--bad); font-size: 13px; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.chip { font: 500 11px var(--mono); letter-spacing: .04em; text-transform: uppercase; padding: 1px 6px; border: 1px solid var(--rule); color: var(--muted); }
+.chip.track { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+.side { display: grid; gap: 6px; justify-items: end; }
+.side select, .side input { font: 13px var(--sans); color: var(--ink); background: var(--sheet); border: 1px solid var(--rule); border-radius: 3px; padding: 4px 6px; width: 150px; }
+.cvs { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+.appliedbtn { font: 600 12px var(--sans); color: var(--sheet); background: var(--good); border: 0; border-radius: 3px; padding: 4px 9px; cursor: pointer; }
+.msgbtn { font: 500 12px var(--sans); color: var(--ink); background: none; border: 1px solid var(--rule); border-radius: 3px; padding: 3px 8px; cursor: pointer; }
+.msgbox { width: 100%; min-height: 140px; font: 13px/1.4 var(--sans); color: var(--ink); background: var(--paper); border: 1px solid var(--rule); padding: 6px; grid-column: 1 / -1; }
+.cvbtn { font: 500 12px var(--sans); color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 3px; padding: 3px 8px; cursor: pointer; }
+.st-applied, .st-reply, .st-interview { border-color: var(--accent) !important; }
+.st-offer { border-color: var(--good) !important; }
+.st-rejected, .st-skip { opacity: .6; }
+h2 { font-size: 16px; font-weight: 600; margin: 0; }
+h2.reg { margin: 0; }
+.search-bar { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-top: 28px; }
+button.run { font: 600 14px var(--sans); color: var(--sheet); background: var(--accent); border: 0; border-radius: 3px; padding: 7px 16px; cursor: pointer; }
+button.run:disabled { opacity: .55; cursor: default; }
+.scores { display: grid; gap: 3px; }
+.sched { font: 500 10.5px var(--mono); color: var(--muted); text-align: center; white-space: nowrap; }
+.apps { margin-top: 18px; }
+.apps-head { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; margin-bottom: 8px; }
+.apps-scroll { overflow-x: auto; border: 1px solid var(--rule); background: var(--sheet); }
+#apps { border-collapse: collapse; width: 100%; min-width: 720px; font-size: 13px; }
+#apps th { text-align: left; font: 500 10.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 8px 10px; border-bottom: 1px solid var(--rule); }
+#apps td { padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+#apps td.d { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pill { font: 500 11px var(--mono); padding: 1px 7px; border: 1px solid currentColor; white-space: nowrap; }
+.p-confirmed { color: var(--accent); } .p-rejected { color: var(--bad); } .p-on_hold { color: var(--warn); }
+.p-reply, .p-interview, .p-offer { color: var(--good); }
+.muted { color: var(--muted); font-size: 13px; }
+.empty { border: 1px dashed var(--rule); padding: 28px; text-align: center; color: var(--muted); background: var(--sheet); }
+@media (max-width: 640px) {
+  .block { grid-template-columns: 1fr 1fr; } .block > div:first-child { grid-column: 1 / -1; border-bottom: 1px solid var(--rule); }
+  .block > div:nth-child(2) { border-left: 0; }
+  .job { grid-template-columns: 58px 1fr; } .side { grid-column: 1 / -1; justify-items: stretch; grid-template-columns: 1fr 1fr; }
+  .side select, .side input { width: 100%; }
+  .cvs { grid-column: 1 / -1; justify-content: flex-start; }
+}
+</style>
+
+<div class="wrap">
+  <header class="block">
+    <div><div class="lbl">Поиск работы · <span id="cName"></span></div><h1>Реестр вакансий</h1></div>
+    <div><div class="lbl">Email для откликов</div><div class="val"><span id="mail"></span><button class="copy" id="copyMail" type="button">копировать</button></div></div>
+    <div><div class="lbl">Дедлайн</div><div class="val"><span id="cDeadline"></span></div></div>
+  </header>
+
+  <section class="apps" aria-labelledby="appsH">
+    <div class="apps-head"><h2 id="appsH">Отклики</h2><span class="lbl" id="appsMeta"></span></div>
+    <div class="apps-scroll"><table id="apps"><thead><tr><th>Компания</th><th>Должность</th><th>Подано</th><th>Статус</th><th>Обновлено</th><th>Заметка</th></tr></thead><tbody><tr><td colspan="6" class="muted">Загружаю отклики…</td></tr></tbody></table></div>
+    <p class="muted" id="appsUnconf"></p>
+  </section>
+
+  <div class="search-bar">
+    <h2 class="reg">Найденные вакансии</h2>
+    <button type="button" id="runSearch" class="run">Искать</button>
+    <span class="muted" id="searchMsg">Проверит 100+ сайтов вакансий по вашим ключевым словам. Займёт 30–60 минут.</span>
+  </div>
+  <section class="stats" id="stats" aria-label="Сводка по статусам"></section>
+
+  <div class="filters">
+    <input type="search" id="q" placeholder="Поиск: компания, должность, город" aria-label="Поиск">
+    <select id="fTrack" aria-label="Направление"><option value="">Все направления</option><option value="a" id="optA">A</option><option value="b" id="optB">B</option></select>
+    <select id="fMin" aria-label="Минимальная оценка навыков"><option value="7">Навыки 7+</option><option value="5">Навыки 5+</option><option value="0">Навыки: все</option></select>
+    <select id="fSched" aria-label="Совместимость с графиком"><option value="0">График: любой</option><option value="5">График 5+</option><option value="7">График 7+</option></select>
+    <select id="fStatus" aria-label="Статус"><option value="active">Без пропущенных</option><option value="">Все статусы</option></select>
+  </div>
+
+  <div class="list" id="list"><div class="empty">Вакансии появятся здесь, когда Claude загрузит оценённую базу.</div></div>
+</div>
+
+<script>
+const STATUSES = [["new","Новая"],["shortlist","Подать"],["applied","Подался"],["reply","Есть ответ"],["interview","Собеседование"],["offer","Оффер"],["rejected","Отказ"],["skip","Пропустить"]];
+const LABEL = Object.fromEntries(STATUSES);
+const $ = id => document.getElementById(id);
+let jobs = [], db = null, canWrite = true;
+
+for (const [v, l] of STATUSES) $("fStatus").add(new Option(l, v));
+try { const s = JSON.parse(localStorage.getItem("jb-filters") || "{}"); for (const k of ["fTrack","fMin","fSched","fStatus"]) if (s[k] != null) $(k).value = s[k]; } catch {}
+
+$("copyMail").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText($("mail").textContent); $("copyMail").textContent = "скопировано"; }
+  catch { getSelection().selectAllChildren($("mail")); }
+});
+for (const id of ["q","fTrack","fMin","fSched","fStatus"]) $(id).addEventListener("input", () => {
+  try { localStorage.setItem("jb-filters", JSON.stringify({fTrack: $("fTrack").value, fMin: $("fMin").value, fSched: $("fSched").value, fStatus: $("fStatus").value})); } catch {}
+  render();
+});
+
+function esc(s) { return String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+function renderStats() {
+  const c = {}; for (const j of jobs) c[j.status || "new"] = (c[j.status || "new"] || 0) + 1;
+  const hi = jobs.filter(j => j.fit >= 7).length;
+  $("stats").innerHTML = `<div class="stat"><span class="lbl">Всего</span><b>${jobs.length}</b></div>
+    <div class="stat"><span class="lbl">Навыки 7+</span><b>${hi}</b></div>` +
+    ["shortlist","applied","reply","interview","offer"].map(s => `<div class="stat"><span class="lbl">${LABEL[s]}</span><b>${c[s] || 0}</b></div>`).join("");
+}
+
+function render() {
+  renderStats();
+  const q = $("q").value.trim().toLowerCase(), tr = $("fTrack").value, min = +$("fMin").value, ms = +$("fSched").value, st = $("fStatus").value;
+  const rows = jobs.filter(j => (j.fit ?? 0) >= min && (!ms || (j.schedule ?? 0) >= ms) && (!tr || j.track === tr)
+    && (st === "" || (st === "active" ? !["skip","rejected","applied"].includes(j.status) : (j.status || "new") === st))
+    && (!q || `${j.title} ${j.company} ${j.location}`.toLowerCase().includes(q)));
+  if (!rows.length) { $("list").innerHTML = `<div class="empty">${jobs.length ? "Под эти фильтры ничего нет. Ослабьте оценку или статус." : "Вакансии появятся здесь, когда Claude загрузит оценённую базу."}</div>`; return; }
+  $("list").innerHTML = rows.map(j => {
+    const sc = j.fit >= 7 ? "s-hi" : j.fit >= 5 ? "s-mid" : "s-lo", status = j.status || "new";
+    const sched = j.schedule == null ? "?" : j.schedule;
+    return `<article class="job st-${status}" data-id="${esc(j._id)}">
+      <div class="scores"><div class="score ${sc}" title="FIT по навыкам">${esc(j.fit)}</div><div class="sched" title="Совместимость с графиком">график ${esc(sched)}</div></div>
+      <div class="main">
+        <a class="title" href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.title)}</a>
+        <div class="meta">${esc(j.company)} · ${esc(j.location)}${j.posted ? " · " + esc(j.posted) : ""} · ${esc(j.source)}</div>
+        ${j.why ? `<div class="why">${esc(j.why)}</div>` : ""}
+        ${j.red_flags ? `<div class="flags">⚠ ${esc(j.red_flags)}</div>` : ""}
+        <div class="chips"><span class="chip track">${esc(CFG.tracks[j.track] || j.track)}</span><span class="chip">${esc(j.level)}</span><span class="chip">${esc(j.format)}</span><span class="chip">CV: ${esc(j.cv)}</span></div>
+      </div>
+      <div class="side">
+        <select class="st" aria-label="Статус" ${canWrite ? "" : "disabled"}>${STATUSES.map(([v,l]) => `<option value="${v}" ${v===status?"selected":""}>${l}</option>`).join("")}</select>
+        <input class="note" placeholder="Заметка" value="${esc(j.note)}" aria-label="Заметка" ${canWrite ? "" : "disabled"}>
+        <div class="cvs">${j.cv_file ? `<button type="button" class="cvbtn" data-file="${esc(j.cv_file)}">CV под вакансию</button>` : ""}
+          <button type="button" class="cvbtn" data-file="${cvFile(j, "PL")}">CV PL</button><button type="button" class="cvbtn" data-file="${cvFile(j, "EN")}">CV EN</button>
+          <button type="button" class="appliedbtn" ${canWrite ? "" : "disabled"}>Подался</button>
+          <button type="button" class="msgbtn" data-lang="PL">Сообщение PL</button><button type="button" class="msgbtn" data-lang="EN">Сообщение EN</button></div>
+        <textarea class="msgbox" readonly hidden aria-label="Мотивационное сообщение"></textarea>
+      </div></article>`;
+  }).join("");
+}
+
+let base = [], marks = {};
+function merge() { jobs = base.map(j => ({...j, ...(marks[j._id] || {})})); render(); renderApps(); }
+const docId = id => id.replace(/[^A-Za-z0-9_\-.~:@+]/g, "_");
+
+async function save(id, patch) {
+  if (!db) return;
+  marks[id] = {...(marks[id] || {}), ...patch}; merge();
+  try { await db.doc("status/" + docId(id)).set({...marks[id], updatedAt: new Date().toISOString()}); }
+  catch (e) { if (e?.code === "invalid_argument") { canWrite = false; render(); } }
+}
+// Base CVs per track and language; a tailored CV (cv_file) is offered first when the search built one.
+const cvFile = (j, lang) => `cv/${CFG.cv_prefix}_${j.cv || j.track}_${lang}.pdf`;
+// Motivation message: a tailored one from the search (j.message) when present, otherwise a template per track and language.
+let CFG = {messages: {}, tracks: {}};
+const fill = (t, j) => (t || "").replace(/\{title\}/g, j.title || "").replace(/\{company\}/g, j.company || "");
+const messageFor = (j, lang) => (j.message && j.message[lang]) || fill(((CFG.messages[j.cv || j.track] || {})[lang]), j);
+$("list").addEventListener("click", async e => {
+  const a = e.target.closest(".appliedbtn");
+  if (a) {
+    const j = jobs.find(x => x._id === a.closest(".job").dataset.id);
+    save(j._id, {status: "applied", appliedAt: new Date().toISOString().slice(0, 10), company: j.company, title: j.title, url: j.url});
+    return;
+  }
+  const m = e.target.closest(".msgbtn");
+  if (m) {
+    const card = m.closest(".job"), j = jobs.find(x => x._id === card.dataset.id), text = messageFor(j, m.dataset.lang), label = m.textContent;
+    try { await navigator.clipboard.writeText(text); m.textContent = "Скопировано"; }
+    catch { const box = card.querySelector(".msgbox"); box.value = text; box.hidden = false; box.focus(); box.select(); m.textContent = "Выделено, Ctrl+C"; }
+    setTimeout(() => { m.textContent = label; }, 2500);
+    return;
+  }
+  const b = e.target.closest(".cvbtn"); if (!b) return;
+  const label = b.textContent, dl = await claude.use("downloads");
+  if (!dl) { b.textContent = "Недоступно здесь"; return; }
+  try {
+    const blob = await (await fetch(b.dataset.file)).blob();
+    await dl.save({filename: b.dataset.file.split("/").pop(), data: blob});
+  } catch (err) {
+    if (err?.code === "declined") return;
+    b.textContent = err?.code === "rate_limited" ? "Подождите…" : "Не скачалось";
+    setTimeout(() => { b.textContent = label; }, 2500);
+  }
+});
+$("list").addEventListener("change", e => {
+  const card = e.target.closest(".job"); if (!card) return;
+  if (e.target.matches(".st")) save(card.dataset.id, {status: e.target.value});
+  if (e.target.matches(".note")) save(card.dataset.id, {note: e.target.value});
+});
+
+const APP_LABEL = {confirmed: "Подано", rejected: "Отказ", on_hold: "На паузе", reply: "Есть ответ", interview: "Собеседование", offer: "Оффер"};
+const APP_ORDER = {offer: 0, interview: 1, reply: 2, on_hold: 3, confirmed: 4, rejected: 5};
+// "Искать" fires the job-search scheduled task in Claude Code, which runs SEARCH.md and republishes this page.
+
+$("runSearch").addEventListener("click", async () => {
+  const btn = $("runSearch"), msg = $("searchMsg");
+  const mcp = await claude.use("mcp");
+  if (!mcp) { msg.textContent = "Кнопка работает только в claude.ai. Попросите Claude в чате поиска запустить поиск."; return; }
+  btn.disabled = true; msg.textContent = "Запускаю…";
+  try {
+    await mcp.callTool("Claude Code Remote", "fire_trigger", {trigger_id: CFG.search_trigger_id});
+    msg.textContent = "Поиск запущен. Страница обновится сама, когда Claude закончит (30–60 минут).";
+  } catch (e) {
+    btn.disabled = false;
+    msg.textContent = {
+      approval_required: "Нужно разрешение: нажмите «Искать» ещё раз и разрешите доступ к Claude Code.",
+      not_in_manifest: "Доступ к Claude Code для этой страницы выключен. Включите его в разрешениях страницы.",
+      server_not_connected: "Коннектор Claude Code Remote не подключён. Добавьте его в настройках коннекторов claude.ai.",
+      needs_reauth: "Переподключите Claude Code Remote в настройках коннекторов claude.ai.",
+      tool_error: "Запуск не прошёл: задача поиска не найдена или выключена. Напишите Claude в чате поиска.",
+    }[e?.code] || "Не получилось запустить поиск. Если Claude уже начал работу, страница обновится сама; иначе нажмите ещё раз позже.";
+  }
+});
+
+let appsData = null;
+function renderApps() {
+  if (!appsData) return;
+  const d = appsData, known = new Set(d.applications.map(r => r.url).filter(Boolean));
+  // Jobs marked "Подался" on this page join the register until the next mail check records them in applications.json.
+  const manual = jobs.filter(j => j.status === "applied" && !known.has(j.url)).map(j => ({company: j.company, role: j.title,
+    applied: j.appliedAt || "", status: "confirmed", updated: j.appliedAt || "", note: "Отмечено кнопкой «Подался»", url: j.url}));
+  const rows = d.applications.concat(manual).sort((a, b) => (APP_ORDER[a.status] - APP_ORDER[b.status]) || b.applied.localeCompare(a.applied));
+  const n = s => rows.filter(r => r.status === s).length;
+  $("appsMeta").textContent = `${rows.length} откликов (${manual.length} отмечено вручную) · отказов ${n("rejected")} · на паузе ${n("on_hold")} · почта проверена ${d.checked}`;
+  $("apps").tBodies[0].innerHTML = rows.map(r => `<tr><td>${esc(r.company)}</td><td>${esc(r.role)}</td><td class="d">${esc(r.applied)}</td>
+    <td><span class="pill p-${esc(r.status)}">${esc(APP_LABEL[r.status] || r.status)}</span></td><td class="d">${esc(r.updated)}</td><td class="muted">${esc(r.note)}</td></tr>`).join("");
+  $("appsUnconf").textContent = "Без следа в почте: " + d.no_email_trace.join("; ") + ".";
+}
+fetch("config.json").then(r => r.json()).then(c => {
+  CFG = c; $("cName").textContent = c.name; $("mail").textContent = c.email; $("cDeadline").textContent = c.deadline;
+  $("optA").textContent = c.tracks.a; $("optB").textContent = c.tracks.b; render();
+}).catch(() => {});
+fetch("applications.json").then(r => r.json()).then(d => { appsData = d; renderApps(); }).catch(() => { $("apps").tBodies[0].innerHTML = `<tr><td colspan="6" class="muted">Не удалось загрузить список откликов.</td></tr>`; });
+
+fetch("jobs.json").then(r => r.json()).then(rows => {
+  base = rows.map(j => ({...j, _id: docId(j.id)})).sort((a, b) => ((b.fit ?? 0) + (b.schedule ?? 5)) - ((a.fit ?? 0) + (a.schedule ?? 5)));
+  merge();
+}).catch(() => {});
+
+(async () => {
+  db = await claude.use("db");
+  const user = await claude.use("user");
+  if (user && (await user.can("data.write")) === false) canWrite = false;
+  if (!db) { canWrite = false; render(); return; }
+  db.collection("status").limit(1000).onSnapshot(snap => {
+    marks = Object.fromEntries(snap.docs.map(d => [d.id, d.data()]));
+    merge();
+  }, () => {});
+})();
+</script>
